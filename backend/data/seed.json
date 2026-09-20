@@ -1,0 +1,1364 @@
+{
+ "project": {
+  "project_id": "P001",
+  "ship_name": "(가상) 대형 컨테이너선 A호",
+  "class_society": "DNV",
+  "system": "해수 냉각",
+  "part_type": "버터플라이 밸브",
+  "need_by_date": "2026-12-15",
+  "is_synthetic": "true"
+ },
+ "requirements": [
+  {
+   "id": "R01",
+   "field": "nominal_diameter",
+   "op": "=",
+   "value": "200",
+   "unit": "mm",
+   "mandatory": true,
+   "note": "구경 DN200"
+  },
+  {
+   "id": "R02",
+   "field": "design_pressure",
+   "op": "gte",
+   "value": "10",
+   "unit": "bar",
+   "mandatory": true,
+   "note": "설계압력 10bar 이상"
+  },
+  {
+   "id": "R03",
+   "field": "body_material",
+   "op": "in",
+   "value": "NAB|DI_RUBBER_LINED",
+   "unit": "",
+   "mandatory": true,
+   "note": "해수 계통: 스테인리스 불허 (DNV TAP00000MH p.2 근거). 허용 목록 자체는 시연용 가정"
+  },
+  {
+   "id": "R04",
+   "field": "flange_standard",
+   "op": "=",
+   "value": "JIS_10K",
+   "unit": "",
+   "mandatory": true,
+   "note": "배관 측 플랜지 규격"
+  },
+  {
+   "id": "R05",
+   "field": "class_approval",
+   "op": "includes",
+   "value": "DNV",
+   "unit": "",
+   "mandatory": true,
+   "note": "선급 형식승인"
+  },
+  {
+   "id": "R06",
+   "field": "temp_max",
+   "op": "gte",
+   "value": "60",
+   "unit": "degC",
+   "mandatory": false,
+   "note": "최고 사용온도 (선택조건)"
+  },
+  {
+   "id": "R07",
+   "field": "lead_time_days",
+   "op": "lte",
+   "value": "75",
+   "unit": "day",
+   "mandatory": false,
+   "note": "필요 납기 (기술 적합성과 별도 표시)"
+  }
+ ],
+ "products": [
+  {
+   "id": "V01",
+   "manufacturer": "가상마린밸브",
+   "model": "SMV-200-A",
+   "leadTime": 60,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "모든 조건 충족",
+   "expected": "MATCH",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "SMV-200-A_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "SMV-200-A_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "SMV-200-A_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "SMV-200-A_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "SMV-200-A_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "SMV-200-A_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0001",
+     "validUntil": "2028-12-31",
+     "file": "SMV-200-A_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V02",
+   "manufacturer": "오션플로우(가상)",
+   "model": "OF-BF200",
+   "leadTime": 70,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "모든 조건 충족",
+   "expected": "MATCH",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "OF-BF200_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "OF-BF200_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "OF-BF200_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "OF-BF200_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "OF-BF200_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "OF-BF200_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0002",
+     "validUntil": "2028-12-31",
+     "file": "OF-BF200_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "authority": "KR",
+     "certNo": "SYN-KR-0003",
+     "validUntil": "2028-12-31",
+     "file": "OF-BF200_KR_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V03",
+   "manufacturer": "가상마린밸브",
+   "model": "SMV-200-B",
+   "leadTime": 120,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "기술 충족 + 납기 지연",
+   "expected": "MATCH",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "SMV-200-B_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "SMV-200-B_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "SMV-200-B_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "SMV-200-B_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "SMV-200-B_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "SMV-200-B_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0004",
+     "validUntil": "2028-12-31",
+     "file": "SMV-200-B_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V04",
+   "manufacturer": "한별밸브(가상)",
+   "model": "HB-200S",
+   "leadTime": null,
+   "leadTimeSource": "",
+   "leadTimeCheckedAt": "",
+   "scenario": "기술 충족 + 납기 정보 없음",
+   "expected": "MATCH",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "HB-200S_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "HB-200S_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "DI_RUBBER_LINED",
+     "unit": "",
+     "raw": "Ductile iron, rubber lined",
+     "file": "HB-200S_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "HB-200S_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "HB-200S_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "HB-200S_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0005",
+     "validUntil": "2028-12-31",
+     "file": "HB-200S_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V05",
+   "manufacturer": "오션플로우(가상)",
+   "model": "OF-BF200-X",
+   "leadTime": 65,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "인증 자료 없음",
+   "expected": "CHECK",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "OF-BF200-X_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "OF-BF200-X_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "OF-BF200-X_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "OF-BF200-X_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "OF-BF200-X_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "OF-BF200-X_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [],
+   "synthetic": true
+  },
+  {
+   "id": "V06",
+   "manufacturer": "블루씰(가상)",
+   "model": "BS-2000",
+   "leadTime": 55,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "플랜지 규격 자료 없음",
+   "expected": "CHECK",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "BS-2000_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "BS-2000_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "BS-2000_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "BS-2000_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "BS-2000_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0006",
+     "validUntil": "2028-12-31",
+     "file": "BS-2000_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V07",
+   "manufacturer": "블루씰(가상)",
+   "model": "BS-2000-L",
+   "leadTime": 90,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "인증·재질 자료 없음",
+   "expected": "CHECK",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "BS-2000-L_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "BS-2000-L_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "BS-2000-L_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "BS-2000-L_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "BS-2000-L_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [],
+   "synthetic": true
+  },
+  {
+   "id": "V08",
+   "manufacturer": "노스게이트(가상)",
+   "model": "NG-BV200",
+   "leadTime": 50,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "플랜지 규격 불일치(PN16)",
+   "expected": "EXCLUDED",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "NG-BV200_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "NG-BV200_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "NG-BV200_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "PN16",
+     "unit": "",
+     "raw": "EN 1092-1 PN16",
+     "file": "NG-BV200_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "NG-BV200_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "NG-BV200_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0007",
+     "validUntil": "2028-12-31",
+     "file": "NG-BV200_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V09",
+   "manufacturer": "노스게이트(가상)",
+   "model": "NG-BV200-A",
+   "leadTime": 58,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "플랜지 규격 불일치(ASME 150)",
+   "expected": "EXCLUDED",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "NG-BV200-A_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "NG-BV200-A_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "NG-BV200-A_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "ASME_150",
+     "unit": "",
+     "raw": "ASME B16.5 Class 150",
+     "file": "NG-BV200-A_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "NG-BV200-A_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "NG-BV200-A_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0008",
+     "validUntil": "2028-12-31",
+     "file": "NG-BV200-A_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "authority": "ABS",
+     "certNo": "SYN-ABS-0009",
+     "validUntil": "2028-12-31",
+     "file": "NG-BV200-A_ABS_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V10",
+   "manufacturer": "한별밸브(가상)",
+   "model": "HB-150S",
+   "leadTime": 45,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "구경 미달(DN150)",
+   "expected": "EXCLUDED",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "150",
+     "unit": "mm",
+     "raw": "DN150",
+     "file": "HB-150S_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "HB-150S_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "HB-150S_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "HB-150S_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "HB-150S_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "HB-150S_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0010",
+     "validUntil": "2028-12-31",
+     "file": "HB-150S_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V11",
+   "manufacturer": "가상마린밸브",
+   "model": "SMV-200-LP",
+   "leadTime": 52,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "압력 미달(6bar)",
+   "expected": "EXCLUDED",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "SMV-200-LP_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "6",
+     "unit": "bar",
+     "raw": "PN6 (6 bar)",
+     "file": "SMV-200-LP_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "SMV-200-LP_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "SMV-200-LP_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "SMV-200-LP_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "SMV-200-LP_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0011",
+     "validUntil": "2028-12-31",
+     "file": "SMV-200-LP_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V12",
+   "manufacturer": "오션플로우(가상)",
+   "model": "OF-CI200",
+   "leadTime": 40,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "재질 부적합(주철)",
+   "expected": "EXCLUDED",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "OF-CI200_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "OF-CI200_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "CAST_IRON",
+     "unit": "",
+     "raw": "Cast iron GG25",
+     "file": "OF-CI200_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "OF-CI200_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "OF-CI200_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "OF-CI200_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0012",
+     "validUntil": "2028-12-31",
+     "file": "OF-CI200_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V13",
+   "manufacturer": "블루씰(가상)",
+   "model": "BS-2000-K",
+   "leadTime": 62,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "DNV 인증 없음(KR·ABS만)",
+   "expected": "EXCLUDED",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "BS-2000-K_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "BS-2000-K_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "BS-2000-K_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "BS-2000-K_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "80",
+     "unit": "degC",
+     "raw": "Max 80°C",
+     "file": "BS-2000-K_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "MANUAL_GEAR",
+     "unit": "",
+     "raw": "Gear operated",
+     "file": "BS-2000-K_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "KR",
+     "certNo": "SYN-KR-0013",
+     "validUntil": "2028-12-31",
+     "file": "BS-2000-K_KR_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "authority": "ABS",
+     "certNo": "SYN-ABS-0014",
+     "validUntil": "2028-12-31",
+     "file": "BS-2000-K_ABS_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V14",
+   "manufacturer": "한별밸브(가상)",
+   "model": "HB-200P",
+   "leadTime": 68,
+   "leadTimeSource": "공급사 회신(가상)",
+   "leadTimeCheckedAt": "2026-09-19",
+   "scenario": "필수 충족, 선택(온도) 미달",
+   "expected": "MATCH",
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "200",
+     "unit": "mm",
+     "raw": "DN200",
+     "file": "HB-200P_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "design_pressure",
+     "value": "16",
+     "unit": "bar",
+     "raw": "PN16 (16 bar)",
+     "file": "HB-200P_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "NAB",
+     "unit": "",
+     "raw": "Ni-Al Bronze (NAB)",
+     "file": "HB-200P_datasheet.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K",
+     "unit": "",
+     "raw": "JIS B2220 10K",
+     "file": "HB-200P_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "50",
+     "unit": "degC",
+     "raw": "Max 50°C",
+     "file": "HB-200P_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "actuator_type",
+     "value": "PNEUMATIC",
+     "unit": "",
+     "raw": "Pneumatic actuator",
+     "file": "HB-200P_datasheet.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "SYN-DNV-0015",
+     "validUntil": "2028-12-31",
+     "file": "HB-200P_DNV_cert.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "V15",
+   "manufacturer": "Korea Unicomvalve Co., Ltd.",
+   "model": "High-Seal (GTD/FSD/MTD)",
+   "leadTime": null,
+   "leadTimeSource": "",
+   "leadTimeCheckedAt": "",
+   "scenario": "실제 공개 문서 기반: DNV 형식승인서(인증 만료, 스테인리스 재질)",
+   "expected": "EXCLUDED",
+   "real": {
+    "label": "DNV 형식승인서 TAP00000MH",
+    "url": "https://approvalfinder.dnv.com/api/approval/document?id=TAP00000MH"
+   },
+   "specs": [
+    {
+     "field": "nominal_diameter",
+     "value": "50-600",
+     "unit": "mm",
+     "display": "DN50 ~ DN600 (승인 범위)",
+     "rangeMin": 50,
+     "rangeMax": 600,
+     "raw": "Sizes: DN 50 to DN 600",
+     "file": "DNV_TAP00000MH_UnicomValve.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "flange_standard",
+     "value": "JIS_10K|JIS_16K|JIS_20K|PN10|PN16|PN20|PN25|ASME_150",
+     "unit": "",
+     "display": "JIS 10K/16K/20K, PN10~25, ANSI 150",
+     "raw": "Drwg. No: U0310-D01-002 — JIS 10K, DN200-DN350 Valve Ass'y",
+     "file": "DNV_TAP00000MH_UnicomValve.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "body_material",
+     "value": "WCB|CF8|CF8M",
+     "unit": "",
+     "display": "WCB / CF8 / CF8M (탄소강·스테인리스 주강)",
+     "raw": "Body: ASTM A216 Gr. WCB and ASTM A351 Gr. CF8/CF8M",
+     "note": "승인서 p.2: 스테인리스 밸브는 해수 계통에서 허용되지 않음",
+     "file": "DNV_TAP00000MH_UnicomValve.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "field": "temp_max",
+     "value": "204",
+     "unit": "degC",
+     "display": "204 °C 이상 (시트별 상이, 최대 420 °C)",
+     "raw": "GTD PTFE / RTFE: +204°C ... MTD Inconel 625: +420°C",
+     "file": "DNV_TAP00000MH_UnicomValve.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "certs": [
+    {
+     "authority": "DNV",
+     "certNo": "TAP00000MH",
+     "validUntil": "2021-06-30",
+     "file": "DNV_TAP00000MH_UnicomValve.pdf",
+     "page": 1,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ],
+   "synthetic": false,
+   "restrictions": [
+    {
+     "kind": "PROHIBITED",
+     "contexts": [
+      "seawater"
+     ],
+     "materials": [
+      "CF8",
+      "CF8M",
+      "SS304",
+      "SS316",
+      "DUPLEX_SS"
+     ],
+     "summary": "스테인리스 재질 밸브는 해수 계통에서 사용 불가",
+     "quote": "Stainless steel valves are not permitted in seawater systems.",
+     "file": "DNV_TAP00000MH_UnicomValve.pdf",
+     "page": 2,
+     "note": "승인서 명시 조건. 이 승인서의 본체 재질 중 CF8·CF8M이 해당",
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "kind": "CONDITIONAL",
+     "contexts": [
+      "bilge"
+     ],
+     "materials": [],
+     "summary": "빌지 흡입에는 역지 밸브와 함께 설치할 때만 사용 가능",
+     "quote": "These valves may be used for bilge suction when fitted in connection with a non-return valve.",
+     "file": "DNV_TAP00000MH_UnicomValve.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    },
+    {
+     "kind": "CONDITIONAL",
+     "contexts": [
+      "shipside"
+     ],
+     "materials": [],
+     "summary": "선측 밸브로 쓸 때 열린 상태에서 디스크가 선체 외판 밖으로 나오면 안 됨",
+     "quote": "When used as shipside valves the disc must not extend outside the hull plating in open position.",
+     "file": "DNV_TAP00000MH_UnicomValve.pdf",
+     "page": 2,
+     "extractedBy": "seed",
+     "confirmed": true
+    }
+   ]
+  }
+ ]
+}

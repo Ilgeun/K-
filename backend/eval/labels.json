@@ -1,0 +1,50 @@
+{
+  "_readme": "정답 라벨. 추출기를 돌리기 전에 작성함(2026-09-19). 작성자: Claude(사람 검수 전). 모호한 항목은 note 에 근거를 적었다. set 항목은 required ⊆ 추출값 ⊆ required∪allowed_extra 이면 정답.",
+  "docs": {
+    "unicom_DNV_TAP00000MH.pdf": {
+      "product": "butterfly valve", "seawater_restriction": "stainless steel valves not permitted in seawater systems (p.2)",
+      "cert": {"authority": "DNV", "certNo": "TAP00000MH", "validUntil": "2021-06-30"},
+      "nominal_diameter": [50, 600],
+      "flange_standard": {"required": ["JIS_10K","JIS_16K","JIS_20K","PN6","PN10","PN16","PN20","PN25","ASME_150"]},
+      "body_material": {"required": ["WCB","CF8","CF8M"]},
+      "temp_max": {"value": 204, "note": "정의상 좌석별 최고온도 중 최저값(+204°C). 문서 전체 범위 상한은 420°C"},
+      "design_pressure": {"absent": true, "note": "PN/JIS/ANSI 등급만 있고 bar 수치 없음. 'design pressure ≥ 16 bar'는 인증 요건 문구"}
+    },
+    "victaulic_DNV_TAP000012E.pdf": {
+      "product": "CHECK valve (버터플라이 아님)", "seawater_restriction": "seawater applications not permitted (p.2)",
+      "cert": {"authority": "DNV", "certNo": "TAP000012E", "validUntil": "2027-07-12"},
+      "nominal_diameter": [50, 300],
+      "flange_standard": {"required": ["ASME_150"], "note": "'to suit ANSI class 150 flanges' (p.2)"},
+      "body_material": {"required": ["DUCTILE_IRON"], "note": "ASTM A536 65-45-12 nodular cast iron"},
+      "temp_max": {"value": 82, "note": "정의상 최저 상한(Nitrile +82°C). 헤더는 0~120°C"},
+      "design_pressure": {"value": 16, "note": "p.1 'Max. working press.: 16 bar'"}
+    },
+    "xurox_DNV_type_approval.pdf": {
+      "product": "butterfly valve", "seawater_restriction": "austenitic stainless (CF8M, 316) not seawater resistant (p.3)",
+      "cert": {"authority": "DNV", "certNo": "TAP000015F", "validUntil": "2023-02-27"},
+      "nominal_diameter": [32, 1200],
+      "flange_standard": {"required": ["ASME_150","PN10","PN16"]},
+      "body_material": {"required": ["WCB","CF8M","DUCTILE_IRON"], "allowed_extra": ["NAB","DUPLEX_SS"], "note": "본체 재질 목록이 13종. C95500=Ni-Al bronze, F51=duplex 는 허용 추가"},
+      "temp_max": {"value": 90, "note": "정의상 최저 상한(Epiccoridrin +90°C)"},
+      "design_pressure": {"absent": true, "note": "class 150 / PN10 / PN16 등급만 있고 bar 수치 없음"}
+    },
+    "abo_LR_type_approval_2E.pdf": {
+      "product": "butterfly valve", "seawater_restriction": "none (sea water systems allowed)",
+      "cert": {"authority": "LR", "certNo": "LR2206108TA", "validUntil": "2027-01-10", "note": "날짜 형식 DD/MM/YYYY. 발행 11/01/2022, 만료 10/01/2027(5년-1일 패턴)"},
+      "nominal_diameter": [50, 600],
+      "flange_standard": {"required": ["PN6","PN10","PN16","PN25","PN40","PN50","ASME_150","ASME_300"]},
+      "body_material": {"skip": true, "note": "carbon steel 1.0625 / stainless 1.4408 — 앱의 재질 코드(WCB 등)와 1:1 대응이 모호해 채점 제외"},
+      "temp_max": {"value": 320, "note": "-60 to +320°C (standard design)"},
+      "design_pressure": {"value": 50, "note": "'Operating pressure: up to 50 bar'"}
+    },
+    "witzel_type_approval_55.pdf": {
+      "product": "butterfly valve", "seawater_restriction": "none for EV valves; grey cast iron not permitted on shipside",
+      "cert": {"authority": "LR", "certNo": "17/30005", "validUntil": "2022-11-10", "note": "날짜 형식 'DD Month YYYY'"},
+      "nominal_diameter": [40, 2200],
+      "flange_standard": {"required": ["PN10","PN16","ASME_150"]},
+      "body_material": {"required": ["DUCTILE_IRON"], "note": "p.4 'Valve body: EN-JS1030 (GGG40)'. p.3 회주철 문구는 제한 조건"},
+      "temp_max": {"value": 90, "note": "정의상 최저 상한(NBR +90°C). 전체 -10~+200°C"},
+      "design_pressure": {"value": 16, "note": "'Max. Pressure : 16 bar'"}
+    }
+  }
+}

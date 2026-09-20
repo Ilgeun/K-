@@ -1,0 +1,13 @@
+node_modules
+dist
+backend/.venv
+backend/data/marine.db
+backend/data/uploads/*.pdf
+__pycache__
+.pytest_cache
+*.log
+backend/data/eval/*.pdf
+backend/eval/cache_*
+.DS_Store
+.claude/
+*.pyc

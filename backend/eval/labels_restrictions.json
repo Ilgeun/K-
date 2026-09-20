@@ -1,0 +1,51 @@
+{
+  "_readme": "사용 제한 조건 정답 라벨(의미 기준). 추출기 결과를 보기 전에 문서를 읽고 작성(2026-09-20). 작성자: Claude, 사람 검수 전. 사용 상황 어휘(contexts) 밖의 제한(예: 배관 등급, 불활성가스 계통, 수치 온도 범위)은 라벨에서 제외했다.",
+  "_matching": "추출 항목 r 이 라벨 L 과 일치 = r.kind == L.kind AND r.contexts ∩ L.contexts_any ≠ ∅ AND (L.materials_any 가 있으면 r.materials ∩ L.materials_any ≠ ∅) AND (L.needs_scope_other 이면 r.scope_other 가 있어야 함). 라벨에 없는 PROHIBITED 추출은 '근거 없는 금지'로 별도 집계한다.",
+  "docs": {
+    "unicom_DNV_TAP00000MH.pdf": [
+      {"id": "U1", "kind": "PROHIBITED", "contexts_any": ["seawater"], "materials_any": ["CF8", "CF8M", "SS304", "SS316", "DUPLEX_SS"], "note": "스테인리스 밸브는 해수 계통 불가(p.2)"},
+      {"id": "U2", "kind": "CONDITIONAL", "contexts_any": ["bilge"], "note": "빌지 흡입은 역지 밸브와 함께일 때만(p.2)"},
+      {"id": "U3", "kind": "CONDITIONAL", "contexts_any": ["shipside"], "note": "선측 밸브로 쓸 때 디스크가 외판 밖으로 나오면 안 됨(p.2)"}
+    ],
+    "victaulic_DNV_TAP000012E.pdf": [
+      {"id": "V1", "kind": "PROHIBITED", "contexts_any": ["seawater"], "note": "'Seawater applications' 사용 불가 목록(p.2)"},
+      {"id": "V2", "kind": "PROHIBITED", "contexts_any": ["shipside"], "note": "선측·선저·sea chest 불가"},
+      {"id": "V3", "kind": "PROHIBITED", "contexts_any": ["collision_bulkhead"], "note": "충돌 격벽 불가"},
+      {"id": "V4", "kind": "PROHIBITED", "contexts_any": ["fire_safe"], "note": "비금속 시트는 내화 아님, 내화 요구 계통에 설치 불가"},
+      {"id": "V5", "kind": "PROHIBITED", "contexts_any": ["lng_lpg"], "note": "LNG/LPG 적용은 이 인증서 범위 밖"},
+      {"id": "V6", "kind": "PROHIBITED", "contexts_any": ["ballast"], "needs_scope_other": true, "note": "화물유 탱크를 통과해 선수 탱크로 가는 밸러스트 라인(위치 조건)"},
+      {"id": "V7", "kind": "PROHIBITED", "contexts_any": ["bilge"], "needs_scope_other": true, "note": "이중저 터널 내 빌지·밸러스트 배관(위치 조건)"},
+      {"id": "V8", "kind": "PROHIBITED", "contexts_any": ["fuel_oil", "hydrocarbon"], "needs_scope_other": true, "note": "연료·인화성 유 탱크 외벽 정수두 위치(위치 조건)"}
+    ],
+    "xurox_DNV_type_approval.pdf": [
+      {"id": "X1", "kind": "PROHIBITED", "contexts_any": ["seawater"], "materials_any": ["CF8M", "SS316", "CF8", "SS304"], "note": "오스테나이트 스테인리스(CF8M, 316)는 해수 직접 접촉 불가(p.3)"},
+      {"id": "X2", "kind": "PROHIBITED", "contexts_any": ["fire_safe"], "note": "내화 아님, 내화 요구 계통 설치 불가(p.3)"},
+      {"id": "X3", "kind": "PROHIBITED", "contexts_any": ["lng_lpg"], "note": "LNG/LPG 적용은 범위 밖(p.3)"},
+      {"id": "X4", "kind": "PROHIBITED", "contexts_any": ["hydrocarbon"], "needs_scope_other": true, "note": "EPDM·HYPALON 시트는 탄화수소 서비스 불가(시트 재질 조건)"},
+      {"id": "X5", "kind": "CONDITIONAL", "contexts_any": ["shipside"], "note": "선측 밸브로 쓸 때 디스크가 외판 밖으로 나오면 안 됨(p.2)"}
+    ],
+    "abo_LR_type_approval_2E.pdf": [
+      {"id": "A1", "kind": "CONDITIONAL", "contexts_any": ["shipside"], "note": "선측 밸브는 선측 연결부에 볼트 체결 조건"},
+      {"id": "A2", "kind": "CONDITIONAL", "contexts_any": ["cargo_oil", "lng_lpg"], "note": "화물 라인은 in-line 밸브로, 압력·온도·매체에 따라"},
+      {"id": "A3", "kind": "CONDITIONAL", "contexts_any": ["fuel_oil"], "note": "윤활유·연료유 배관은 화재 위험이 낮은 구역, 금속·내화 시트"},
+      {"id": "A4", "kind": "CONDITIONAL", "contexts_any": ["bilge"], "note": "빌지 흡입은 금속 역지 밸브와 함께"},
+      {"id": "A5", "kind": "CONDITIONAL", "contexts_any": ["air"], "note": "공기 배관은 작동 압력 7bar 이하"},
+      {"id": "A6", "kind": "CONDITIONAL", "contexts_any": ["hydrocarbon"], "note": "인화성 액체 계통의 펌프 격리 밸브는 금속·내화 시트만"},
+      {"id": "A7", "kind": "CONDITIONAL", "contexts_any": ["fire_safe"], "note": "소화 주관 격리 밸브는 금속·내화 시트"}
+    ],
+    "witzel_type_approval_55.pdf": [
+      {"id": "W1", "kind": "PROHIBITED", "contexts_any": ["shipside"], "materials_any": ["CAST_IRON"], "note": "회주철 밸브는 선측·선저·sea chest 불가(p.3)"},
+      {"id": "W2", "kind": "PROHIBITED", "contexts_any": ["ballast", "bilge"], "materials_any": ["CAST_IRON"], "note": "회주철 밸브는 탱크·터널 내 빌지·밸러스트 배관 불가"},
+      {"id": "W3", "kind": "PROHIBITED", "contexts_any": ["hydrocarbon", "fuel_oil"], "materials_any": ["CAST_IRON"], "needs_scope_other": true, "note": "회주철 밸브는 7bar·60°C 초과 인화성 유 계통 등 불가(수치 조건)"},
+      {"id": "W4", "kind": "PROHIBITED", "contexts_any": ["collision_bulkhead"], "note": "버터플라이 밸브는 충돌 격벽 불가(p.3)"},
+      {"id": "W5", "kind": "CONDITIONAL", "contexts_any": ["shipside"], "note": "EV형의 선측 밸브 적용은 기관실로 한정(p.3)"},
+      {"id": "W6", "kind": "PROHIBITED", "contexts_any": ["bilge"], "needs_scope_other": true, "note": "여객선의 빌지 계통 적용 불가(선종 조건, p.4)"},
+      {"id": "W7", "kind": "CONDITIONAL", "contexts_any": ["bilge"], "note": "빌지 주관·지관 적용은 기관실 펌프 흡입 등으로 제한(p.4)"},
+      {"id": "W8", "kind": "CONDITIONAL", "contexts_any": ["cargo_oil"], "note": "유조선 화물 배관에서는 in-line 밸브만(p.4)"},
+      {"id": "W9", "kind": "PROHIBITED", "contexts_any": ["hydrocarbon"], "needs_scope_other": true, "note": "내화 시험형은 A급 기관구역·거주구역 내 인화성 액체 계통 불가(형식 조건, p.4)"},
+      {"id": "W10", "kind": "CONDITIONAL", "contexts_any": ["hydrocarbon"], "note": "내화 시험형의 기타 기관구역 사용 조건(p.4)"},
+      {"id": "W11", "kind": "CONDITIONAL", "contexts_any": ["fuel_oil"], "note": "연료유 계통은 이중저 탱크 흡입 밸브 등으로만(p.5)"},
+      {"id": "W12", "kind": "CONDITIONAL", "contexts_any": ["fire_safe"], "note": "소화 주관 격리 밸브는 지정 형식·크기·재질만(p.5)"}
+    ]
+  }
+}
