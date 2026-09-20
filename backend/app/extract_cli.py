@@ -16,6 +16,17 @@ TIMEOUT = int(os.environ.get("MARINE_CLI_TIMEOUT", "240"))
 MODEL = os.environ.get("MARINE_CLI_MODEL")  # 비우면 CLI 기본 모델
 
 
+def parse_output(stdout: str) -> dict:
+    """CLI 표준출력에서 결과 JSON 을 꺼낸다. CLI 가 JSON 앞뒤에 로그 한 줄을 섞어 내보내는 경우가 간헐적으로 있어
+    (예: 'Client.listTools() called but server does not advertise tools capability'), 통째로 파싱하지 않고 첫 JSON 객체만 읽는다."""
+    text = stdout.lstrip()
+    start = text.find("{")
+    if start < 0:
+        raise json.JSONDecodeError("JSON 객체가 없습니다", text, 0)
+    obj, _ = json.JSONDecoder().raw_decode(text[start:])
+    return obj
+
+
 def available() -> bool:
     return shutil.which("claude") is not None
 
@@ -34,7 +45,7 @@ def extract(pages: list[str], file: str) -> Extraction:
     except subprocess.TimeoutExpired:
         raise RuntimeError(f"CLI 응답 시간 초과({TIMEOUT}초)")
     try:
-        res = json.loads(proc.stdout)
+        res = parse_output(proc.stdout)
     except json.JSONDecodeError:
         raise RuntimeError(f"CLI 출력을 해석하지 못했습니다: {(proc.stderr or proc.stdout)[:200]}")
     if res.get("is_error") or res.get("structured_output") is None:

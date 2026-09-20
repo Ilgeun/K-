@@ -351,3 +351,87 @@ def test_old_db_without_restrictions_is_migrated_with_seed_restrictions(tmp_path
     s.conn.execute("DELETE FROM restrictions"); s.conn.commit()            # 사용 제한 기능이 없던 시절의 DB를 흉내
     s2 = db.Store(tmp_path / "old.db")
     assert len(s2.product("V15").restrictions) == 3
+
+
+# --------------------------------------------------------------- 스캔 카탈로그 읽기
+def _scan_pdf_bytes(pages=2):
+    import io
+    from PIL import Image
+    from reportlab.lib.utils import ImageReader
+    from reportlab.pdfgen import canvas
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf)
+    for i in range(pages):
+        im = io.BytesIO()
+        Image.new("RGB", (200 + i * 40, 300), (240, 240, 240)).save(im, "PNG")
+        im.seek(0)
+        c.drawImage(ImageReader(im), 0, 0, width=200, height=300)
+        c.showPage()
+    c.save()
+    return buf.getvalue()
+
+
+class _FakeReader:
+    name = "fake"
+
+    def call(self, kind, image, model, extra=""):
+        from app import catalog_read as cr
+        if kind == "classify":
+            return cr.PageKind(kind="cover", has_table=False, has_text=False)
+        raise AssertionError("cover 쪽은 더 읽지 않아야 한다")
+
+
+def test_catalog_extract_reads_selected_pages(client, monkeypatch):
+    client, _ = client
+    from app import catalog_read as cr
+    monkeypatch.setattr(cr, "pick_reader", lambda mode="auto": _FakeReader())
+    r = client.post("/api/catalog/extract?pages=2", files={"file": ("cat.pdf", _scan_pdf_bytes(3), "application/pdf")})
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["method"] == "fake" and body["pageCount"] == 3 and [p["page"] for p in body["pages"]] == [2]
+    assert any("원문과 대조" in w for w in body["warnings"])
+
+
+def test_catalog_extract_without_a_reader_is_503(client, monkeypatch):
+    client, _ = client
+    from app import catalog_read as cr
+    monkeypatch.setattr(cr, "pick_reader", lambda mode="auto": None)
+    r = client.post("/api/catalog/extract", files={"file": ("cat.pdf", _scan_pdf_bytes(1), "application/pdf")})
+    assert r.status_code == 503
+
+
+def test_catalog_extract_requires_pages_for_long_documents(client, monkeypatch):
+    client, _ = client
+    from app import catalog_read as cr
+    monkeypatch.setattr(cr, "pick_reader", lambda mode="auto": _FakeReader())
+    r = client.post("/api/catalog/extract", files={"file": ("cat.pdf", _scan_pdf_bytes(9), "application/pdf")})
+    assert r.status_code == 422 and "읽을 쪽을 지정" in r.json()["detail"]
+    ok = client.post("/api/catalog/extract?pages=1-2", files={"file": ("cat.pdf", _scan_pdf_bytes(9), "application/pdf")})
+    assert ok.status_code == 200 and [p["page"] for p in ok.json()["pages"]] == [1, 2]
+
+
+def test_catalog_extract_rejects_bad_page_numbers_and_non_pdf(client, monkeypatch):
+    client, _ = client
+    from app import catalog_read as cr
+    monkeypatch.setattr(cr, "pick_reader", lambda mode="auto": _FakeReader())
+    bad = client.post("/api/catalog/extract?pages=5", files={"file": ("cat.pdf", _scan_pdf_bytes(2), "application/pdf")})
+    assert bad.status_code == 422
+    nonpdf = client.post("/api/catalog/extract", files={"file": ("x.pdf", b"hello", "application/pdf")})
+    assert nonpdf.status_code == 415
+
+
+def test_uploading_a_scanned_pdf_to_the_normal_flow_says_it_is_scanned(client):
+    client, _ = client
+    pid = client.get("/api/bootstrap").json()["products"][0]["id"]
+    r = client.post(f"/api/products/{pid}/documents?mode=rules", files={"file": ("scan.pdf", _scan_pdf_bytes(1), "application/pdf")})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["scanned"] is True and "스캔 이미지 PDF" in body["warnings"][0] and body["specs"] == []
+
+
+def test_parse_pages():
+    from app.catalog_read import parse_pages
+    assert parse_pages("", 10) is None and parse_pages("3, 9,12-13", 18) == [3, 9, 12, 13]
+    for bad in ("0", "19", "5-3", "abc"):
+        with pytest.raises(ValueError):
+            parse_pages(bad, 18)

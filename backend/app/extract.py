@@ -7,7 +7,7 @@ import anthropic
 
 from . import extract_cli, extract_llm, extract_rules
 from .extract_types import Extraction
-from .pdf import read_pages
+from .pdf import is_scanned, read_pages
 
 Mode = Literal["auto", "llm", "cli", "rules"]
 
@@ -53,6 +53,11 @@ def run(path: Path, file_name: str, mode: Mode = "auto", client=None) -> Extract
     """auto: Claude API 키가 있으면 API, 없으면 Claude CLI, 둘 다 없으면 규칙 기반."""
     pages = read_pages(path)
     rules = extract_rules.extract(pages, file_name)
+    if is_scanned(pages) and mode in ("auto", "cli", "rules"):
+        # 글자 레이어가 없는 스캔본: 텍스트 추출 경로로는 읽을 수 없다. 카탈로그 읽기(이미지) 경로로 안내한다.
+        rules.scanned = True
+        rules.warnings.insert(0, "스캔 이미지 PDF입니다(글자 없음). 이 경로로는 읽을 수 없으니 ‘스캔 카탈로그 읽기’(쪽을 골라 이미지로 읽기)를 사용하세요.")
+        return rules
     if mode == "auto":
         mode = "llm" if (client is not None or llm_available()) else "cli" if cli_available() else "rules"
         if mode == "rules":

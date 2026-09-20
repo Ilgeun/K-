@@ -63,6 +63,12 @@ HTML 버전: [docs/user-guide/index.html](docs/user-guide/index.html)
 - 기자재 DB(제품·문서)는 모든 선박이 공유한다. 제품 삭제 시 확정 자료와 그 제품만 쓰던 업로드 문서도 함께 삭제되고, 확정한 사양·인증은 개별 삭제(→ ‘확인 필요’로 복귀)할 수 있다.
 - 업로드한 문서의 제품 종류가 등록 제품의 부품 종류와 다르면(예: 체크 밸브 승인서를 버터플라이 제품에 업로드) 경고한다.
 
+## 스캔 카탈로그 읽기 (실험)
+
+글자 레이어가 없는 제조사 카탈로그(스캔 PDF)는 `POST /api/catalog/extract?pages=3,9&mode=cli|api|auto`로 쪽을 골라 이미지로 읽는다.
+표는 여러 번 읽어 셀 단위로 비교하고, 어긋난 셀·행/열 수·누락 문장을 경고로 돌려준다. **결과는 후보·판정에 아직 연결되지 않았고 화면도 없다.**
+시험 결과와 한계는 [backend/eval/REPORT_catalog.md](backend/eval/REPORT_catalog.md). API(이미지 입력) 경로는 실제 호출로 검증하지 못했다.
+
 ## 배포 (Railway)
 
 `Dockerfile`·`railway.json` 으로 프론트엔드+백엔드를 한 서비스로 배포한다. **접속 암호(`APP_PASSWORD`)가 필수**이고 DB·업로드는 Volume(`/data`)에 저장한다. 순서·환경변수·점검·한계는 [docs/DEPLOY_RAILWAY.md](docs/DEPLOY_RAILWAY.md) 참고.

@@ -3,6 +3,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import anthropic
+import pytest
 import httpx
 
 from app import extract as orchestrator
@@ -251,3 +252,14 @@ def test_no_retry_when_ai_found_restrictions_or_rules_found_none():
     stub2 = SeqStub(good())
     orchestrator.run(no_rules, no_rules.name, mode="llm", client=stub2)
     assert stub2.calls == 1
+
+
+def test_cli_output_parser_ignores_log_lines_around_the_json():
+    from app.extract_cli import parse_output
+    import json as _json
+    body = {"type": "result", "structured_output": {"a": 1}}
+    line = "Client.listTools() called but server does not advertise tools capability - returning empty list"
+    for out in (_json.dumps(body), _json.dumps(body) + "\n" + line + "\n", line + "\n" + _json.dumps(body)):
+        assert parse_output(out)["structured_output"] == {"a": 1}
+    with pytest.raises(_json.JSONDecodeError):
+        parse_output("no json here")

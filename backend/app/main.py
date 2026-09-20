@@ -9,6 +9,7 @@ from datetime import date
 from fastapi import Body, FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from pypdf import PdfReader
 
 from . import extract as extractor
 from .contexts import CONTEXT_LABEL, SYSTEM_CONTEXTS, contexts_of
@@ -16,8 +17,10 @@ from . import security
 from .db import DATA, STATE, Store, derive_requirements
 from .engine import evaluate
 from .extract_llm import MODEL
+from . import catalog_read as catalog
 from .extract_types import Extraction
 from .models import Cert, Product, Project, Requirement, Restriction, Spec
+from .pdf import page_images
 
 import json
 
@@ -254,6 +257,40 @@ def upload_document(pid: str, file: UploadFile = File(...), mode: Literal["auto"
     except Exception as e:  # 손상된 PDF 등
         path.unlink(missing_ok=True)
         raise HTTPException(422, f"PDF를 읽을 수 없습니다: {e}")
+
+
+MAX_CATALOG_PAGES = 8      # 쪽을 지정하지 않으면 이 쪽수 이하의 문서만 읽는다(쪽마다 AI 호출이 여러 번 든다)
+
+
+@app.post("/api/catalog/extract")
+def catalog_extract(file: UploadFile = File(...), pages: str = "", mode: Literal["auto", "cli", "api"] = "auto"):
+    """스캔 카탈로그의 지정한 쪽을 이미지로 읽어 표·규격 목록을 구조화한다(저장하지는 않는다)."""
+    data = file.file.read(MAX_UPLOAD + 1)
+    if len(data) > MAX_UPLOAD:
+        raise HTTPException(413, "파일은 20MB 이하만 올릴 수 있습니다")
+    if not data.startswith(b"%PDF"):
+        raise HTTPException(415, "PDF 파일만 업로드할 수 있습니다")
+    reader = catalog.pick_reader(mode)
+    if reader is None:
+        raise HTTPException(503, "이미지를 읽을 방법이 없습니다(Claude API 키 또는 로그인된 Claude CLI 필요)")
+    safe = re.sub(r"[^A-Za-z0-9._-]+", "_", Path(file.filename or "catalog.pdf").stem)[:60] or "catalog"
+    name = f"{uuid.uuid4().hex[:8]}_{safe}.pdf"
+    path = UPLOADS / name
+    path.write_bytes(data)
+    try:
+        count = len(PdfReader(str(path)).pages)
+        want = catalog.parse_pages(pages, count)
+    except ValueError as e:
+        path.unlink(missing_ok=True)
+        raise HTTPException(422, str(e))
+    except Exception as e:  # 손상된 PDF 등
+        path.unlink(missing_ok=True)
+        raise HTTPException(422, f"PDF를 읽을 수 없습니다: {e}")
+    if want is None and count > MAX_CATALOG_PAGES:
+        path.unlink(missing_ok=True)
+        raise HTTPException(422, f"{count}쪽 문서입니다. 읽을 쪽을 지정하세요(예: pages=3,9). 지정하지 않으면 {MAX_CATALOG_PAGES}쪽 이하만 읽습니다")
+    images = page_images(path, want)
+    return catalog.read_catalog(images, reader, name, page_count=count)
 
 
 @app.post("/api/products/{pid}/documents/sample")
