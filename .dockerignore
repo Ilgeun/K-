@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+backend/.venv
+backend/data/marine.db
+backend/data/uploads/*.pdf
+backend/data/eval
+backend/eval
+backend/tests
+backend/scripts
+docs
+**/__pycache__
+.pytest_cache
+*.log
+.DS_Store

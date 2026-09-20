@@ -12,7 +12,8 @@ from pydantic import BaseModel
 
 from . import extract as extractor
 from .contexts import CONTEXT_LABEL, SYSTEM_CONTEXTS, contexts_of
-from .db import DATA, Store, derive_requirements
+from . import security
+from .db import DATA, STATE, Store, derive_requirements
 from .engine import evaluate
 from .extract_llm import MODEL
 from .extract_types import Extraction
@@ -20,10 +21,12 @@ from .models import Cert, Product, Project, Requirement, Restriction, Spec
 
 import json
 
-DOCS, UPLOADS, SAMPLES = DATA / "docs", DATA / "uploads", DATA / "samples"
+DOCS, UPLOADS, SAMPLES = DATA / "docs", STATE / "uploads", DATA / "samples"
+UPLOADS.mkdir(parents=True, exist_ok=True)
 MAX_UPLOAD = 20 * 1024 * 1024
 PART_TYPES = ["버터플라이 밸브", "게이트 밸브", "글로브 밸브", "체크 밸브"]   # 같은 요구조건 항목(구경·압력·재질·플랜지·인증·온도·납기)을 쓰는 밸브 계열
 app = FastAPI(title="MARINE MATCH API")
+security.install(app)
 store = Store()
 SEED = json.loads((DATA / "seed.json").read_text(encoding="utf-8"))
 DEFAULT_REQS = [Requirement(**r) for r in SEED["requirements"]]
@@ -303,3 +306,15 @@ def get_doc(name: str):
         if p.is_file() and p.suffix == ".pdf":
             return FileResponse(p, media_type="application/pdf")
     raise HTTPException(404, "문서를 찾을 수 없습니다")
+
+
+@app.get("/healthz")
+def healthz():
+    return {"ok": True}
+
+
+# 운영 배포: 빌드된 프론트엔드를 같은 서버에서 제공한다(같은 도메인이라 CORS·프록시가 필요 없다). 반드시 모든 API 라우트 뒤에 마운트한다.
+_static = Path(__import__("os").environ.get("MARINE_STATIC_DIR", str(DATA.parent.parent / "dist")))
+if _static.is_dir():
+    from fastapi.staticfiles import StaticFiles
+    app.mount("/", StaticFiles(directory=_static, html=True), name="web")

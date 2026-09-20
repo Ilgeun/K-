@@ -1,5 +1,6 @@
 """SQLite 저장소. 확정된 사양·인증만 판정에 쓰이고, 모든 확정은 감사 로그에 남는다."""
 import json
+import os
 import sqlite3
 import threading
 from datetime import date, datetime
@@ -9,7 +10,9 @@ from typing import Optional
 from .models import Cert, Product, Project, Requirement, Restriction, Spec
 
 ROOT = Path(__file__).parent.parent
-DATA = ROOT / "data"
+DATA = ROOT / "data"                      # 시드·문서·샘플(코드와 함께 배포되는 읽기 전용 자산)
+# DB·업로드 파일은 영구 저장소(볼륨)에 둔다. Railway 볼륨을 붙이면 RAILWAY_VOLUME_MOUNT_PATH 가 자동으로 설정된다.
+STATE = Path(os.environ.get("MARINE_DATA_DIR") or os.environ.get("RAILWAY_VOLUME_MOUNT_PATH") or DATA)
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS products(
   id TEXT PRIMARY KEY, manufacturer TEXT, model TEXT, lead_time INTEGER, lead_time_source TEXT,
@@ -48,7 +51,9 @@ def now() -> str:
 
 
 class Store:
-    def __init__(self, path: Path = DATA / "marine.db"):
+    def __init__(self, path: Optional[Path] = None):
+        path = path or STATE / "marine.db"
+        path.parent.mkdir(parents=True, exist_ok=True)
         self.path = path
         self.lock = threading.RLock()
         self.conn = sqlite3.connect(str(path), check_same_thread=False)

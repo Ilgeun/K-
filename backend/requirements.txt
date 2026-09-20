@@ -1,11 +1,4 @@
-fastapi
-uvicorn[standard]
-python-multipart
-pypdf
-anthropic
-pydantic
+-r requirements-prod.txt
 reportlab
 pytest
 httpx
-cryptography
-fonttools

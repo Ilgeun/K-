@@ -63,6 +63,10 @@ HTML 버전: [docs/user-guide/index.html](docs/user-guide/index.html)
 - 기자재 DB(제품·문서)는 모든 선박이 공유한다. 제품 삭제 시 확정 자료와 그 제품만 쓰던 업로드 문서도 함께 삭제되고, 확정한 사양·인증은 개별 삭제(→ ‘확인 필요’로 복귀)할 수 있다.
 - 업로드한 문서의 제품 종류가 등록 제품의 부품 종류와 다르면(예: 체크 밸브 승인서를 버터플라이 제품에 업로드) 경고한다.
 
+## 배포 (Railway)
+
+`Dockerfile`·`railway.json` 으로 프론트엔드+백엔드를 한 서비스로 배포한다. **접속 암호(`APP_PASSWORD`)가 필수**이고 DB·업로드는 Volume(`/data`)에 저장한다. 순서·환경변수·점검·한계는 [docs/DEPLOY_RAILWAY.md](docs/DEPLOY_RAILWAY.md) 참고.
+
 ## 사용 제한 조건 해석 (AI가 정형화를 넘어 ‘해석’하는 부분)
 
 승인서에는 값이 아니라 **문장으로 쓰인 제한**이 있다(“Seawater applications는 사용 불가”, “스테인리스는 해수 접촉 금지”, “여객선 빌지 사용 불가”).
