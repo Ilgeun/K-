@@ -23,6 +23,24 @@ npm install && npm run dev      # http://localhost:5173  (/api 는 8000 으로 �
 LLM 결과는 원문 인용이 실제 페이지에 있는지 검증하고, 규칙 추출과 값이 다르거나 LLM만 뽑은 항목은
 **⚠ 검증 필요**로 표시해 기본 선택에서 제외합니다. (CLI 호출은 계정 사용량을 소모하며 문서 내용이 Anthropic으로 전송됩니다.)
 
+## 사용 가이드
+
+실제 앱 화면에 번호를 붙여 단계별로 설명한 가이드다(가상 시연 데이터 기준). 저장소 화면에서는 HTML 이 렌더링되지 않으므로 **이미지를 보거나, `index.html` 을 내려받아 브라우저로 여는 것**을 권한다.
+
+| 단계 | 이미지 |
+|---|---|
+| 시작하기 · 결과 읽는 법 · 3분 체험 코스 | [00_시작하기](docs/user-guide/00_시작하기.png) |
+| ① 선박 선택·등록 | [01_선박](docs/user-guide/01_선박.png) |
+| ② 요구조건 확인·수정 | [02_요구조건](docs/user-guide/02_요구조건.png) |
+| ③ 후보 탐색 | [03_후보탐색](docs/user-guide/03_후보탐색.png) |
+| ④ 비교·근거, 원문 보기 | [04_비교_근거](docs/user-guide/04_비교_근거.png) · [04-1_원문보기](docs/user-guide/04-1_원문보기.png) |
+| ⑤ 문서 업로드, 검토·확정(사용 제한 해석) | [05_문서업로드](docs/user-guide/05_문서업로드.png) · [05-1_검토와확정](docs/user-guide/05-1_검토와확정.png) |
+| ⑥ 결과 확인 | [06_결과확인](docs/user-guide/06_결과확인.png) |
+| ⑦ 검토 보고서 | [07_보고서](docs/user-guide/07_보고서.png) |
+| 새 선박 등록 · 자주 묻는 질문 | [08_새선박등록](docs/user-guide/08_새선박등록.png) · [09_자주묻는질문](docs/user-guide/09_자주묻는질문.png) |
+
+HTML 버전: [docs/user-guide/index.html](docs/user-guide/index.html)
+
 ## 구조
 
 | 위치 | 역할 |
