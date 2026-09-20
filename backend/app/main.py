@@ -25,7 +25,7 @@ DOCS, UPLOADS, SAMPLES = DATA / "docs", STATE / "uploads", DATA / "samples"
 UPLOADS.mkdir(parents=True, exist_ok=True)
 MAX_UPLOAD = 20 * 1024 * 1024
 PART_TYPES = ["버터플라이 밸브", "게이트 밸브", "글로브 밸브", "체크 밸브"]   # 같은 요구조건 항목(구경·압력·재질·플랜지·인증·온도·납기)을 쓰는 밸브 계열
-app = FastAPI(title="MARINE MATCH API")
+app = FastAPI(title="SpecBridge API")
 security.install(app)
 store = Store()
 SEED = json.loads((DATA / "seed.json").read_text(encoding="utf-8"))

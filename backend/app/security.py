@@ -29,7 +29,7 @@ class BasicAuth(BaseHTTPMiddleware):
                     return await call_next(request)
             except Exception:
                 pass
-        return PlainTextResponse("인증이 필요합니다.", status_code=401, headers={"WWW-Authenticate": 'Basic realm="MARINE MATCH"'})
+        return PlainTextResponse("인증이 필요합니다.", status_code=401, headers={"WWW-Authenticate": 'Basic realm="SpecBridge"'})
 
 
 def install(app) -> None:

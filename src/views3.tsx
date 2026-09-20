@@ -19,7 +19,7 @@ export function ReportView({ project, reqs, products, evals, selected }: {
       <div className="report-tools no-print"><h2>⑤ 검토 보고서</h2><button className="btn primary" onClick={() => window.print()}>PDF로 저장 / 인쇄</button></div>
       <article className="report">
         <h1>대체 기자재 사전 검토 보고서</h1>
-        <div className="muted small">MARINE MATCH · 생성 {now} · 가상 데이터 + 공개 문서 예시</div>
+        <div className="muted small">SpecBridge · 생성 {now} · 가상 데이터 + 공개 문서 예시</div>
         <h4>1. 검토 개요</h4>
         <table className="table"><tbody>
           <tr><th>선박</th><td>{project.ship_name}</td><th>인정 선급</th><td>{(reqs.find((r) => r.field === "class_approval")?.value ?? project.class_society).split("|").join(" / ")}</td></tr>

@@ -99,7 +99,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="top no-print">
-        <div className="brand"><span className="logo">⚓</span><div><b>MARINE MATCH</b><small>선박 요구조건 기반 대체 기자재 검토</small></div></div>
+        <div className="brand"><span className="logo-badge"><img src="/logo.png" alt="SpecBridge" /></span><small>선박 요구조건 기반<br />대체 기자재 검토</small></div>
         <nav className="steps">{STEPS.map((s, i) => (
           <button key={s} className={`${i === step ? "on" : ""} ${i < step ? "done" : ""}`} onClick={() => setStep(i)}><i>{i + 1}</i>{s}</button>))}</nav>
         <div className="right"><button className="cur-ship" title="선박 변경" onClick={() => setStep(0)}>🚢 {project.ship_name} · {classesOf(project.project_id).split("|").join("/") || project.class_society}</button>
