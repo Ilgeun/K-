@@ -11,3 +11,6 @@ backend/eval/cache_*
 .DS_Store
 .claude/
 *.pyc
+
+# 제조사 카탈로그 시험 정답(저작권 자료에서 옮긴 값)은 저장소에 넣지 않는다
+backend/data/eval/labels_catalog_*
