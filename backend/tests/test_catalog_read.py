@@ -66,8 +66,17 @@ def test_disagreement_with_no_majority_leaves_the_cell_blank_and_warns():
     reader = FakeReader(tables=[tab(variant(R_OK, 1, 3, "111")), tab(variant(R_OK, 1, 3, "222")), tab(variant(R_OK, 1, 3, "333"))])
     res = cr.read_page(IMG, reader)
     t = res.tables[0]
-    assert t.rows[1][3] is None and t.flags[0].majority is None
+    assert t.rows[1][3] is None and t.flags[0].majority is None and t.flags[0].resolved is False
     assert any("끝내 일치하지 않은 셀 1개" in w for w in res.warnings)
+
+
+def test_majority_of_blank_is_resolved_and_raises_no_false_warning():
+    """원본이 '-'(빈칸)인 셀을 한 번만 값으로 잘못 읽으면 경고는 남지만, 과반이 빈칸이므로 '끝내 불일치'가 아니다."""
+    reader = FakeReader(tables=[tab(variant(R_OK, 1, 3, "28.6")), tab(variant(R_OK, 1, 3, None)), tab(variant(R_OK, 1, 3, None))])
+    res = cr.read_page(IMG, reader)
+    t = res.tables[0]
+    assert t.rows[1][3] is None and t.flags[0].resolved is True and t.flags[0].majority is None
+    assert not any("끝내 일치하지 않은" in w for w in res.warnings)
 
 
 def test_structure_check_reports_size_pair_and_monotonic_as_issues():

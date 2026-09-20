@@ -161,7 +161,8 @@ class CellFlag(BaseModel):
     row: int
     column: str
     values: list[Optional[str]]          # 읽기별 값
-    majority: Optional[str] = None       # 과반 값(없으면 비워 담당자 확인)
+    majority: Optional[str] = None       # 과반 값. 과반이 '빈칸'이면 None 이지만 resolved=True
+    resolved: bool = True                # False 면 과반이 없어 값을 비웠다(담당자 확인 필요)
 
 
 class TableResult(BaseModel):
@@ -226,7 +227,7 @@ def merge_table_reads(reads: list[CatalogTable]) -> TableResult:
         _, r, c = key
         rows[r][c] = None if v.flagged and not v.has_majority else show(key, v.majority if v.flagged else v.values[0])
         if v.flagged:
-            flags.append(CellFlag(row=r, column=base.columns[c], values=[r_[key] for r_ in raw],
+            flags.append(CellFlag(row=r, column=base.columns[c], values=[r_[key] for r_ in raw], resolved=v.has_majority,
                                   majority=None if not v.has_majority else show(key, v.majority)))
     flags.sort(key=lambda f: (f.row, f.column))
     # 구조 검사: inch/mm 열이 있는 표만
@@ -282,7 +283,7 @@ def read_page(image: PageImage, reader: Reader, *, table_reads: int = 2) -> Page
         reads = _parallel(lambda: reader.call("table", image, TablePage), max(2, table_reads))
         tables, warn = merge_tables(reads)
         out.warnings += warn
-        if any(f for t in tables for f in t.flags if f.majority is None):      # 2회 읽기에서 어긋남 → 세 번째로 과반을 만든다
+        if any(not f.resolved for t in tables for f in t.flags):      # 2회 읽기에서 어긋나 과반이 없음 → 세 번째로 과반을 만든다
             reads.append(reader.call("table", image, TablePage))
             tables, warn = merge_tables(reads)
             out.warnings += warn
@@ -290,7 +291,7 @@ def read_page(image: PageImage, reader: Reader, *, table_reads: int = 2) -> Page
         out.warnings += _table_shape_warnings(tables)
         out.notes = [n for p in reads[:1] for n in p.notes]
         for t in tables:
-            bad = [f for f in t.flags if f.majority is None]
+            bad = [f for f in t.flags if not f.resolved]
             if bad:
                 out.warnings.append(f"표 '{t.caption}': 읽기끼리 끝내 일치하지 않은 셀 {len(bad)}개를 비워 두었습니다. 원문 확인 필요")
     if kind.has_text:
